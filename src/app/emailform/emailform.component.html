@@ -1,0 +1,38 @@
+<div class="container">
+	<h1>Login</h1>
+	<div>
+		<input [ngModel]="user.email" 
+			(ngModelChange)="valuechange($event)"
+			placeholder="email"
+			type="email" 
+			class="form-control" 
+			id="email"
+			name="email"
+			#email="ngModel"
+			required
+		>
+		<div [hidden]="email.valid || email.pristine"
+			class="alert alert-danger">
+			Email is required
+		</div>
+		<div [hidden]="isEmail == true || email.pristine"
+			class="alert alert-danger">
+			Must be an email
+		</div>
+
+		<input [(ngModel)]="user.password" 
+			placeholder="Password"
+			type="password"
+			class="form-control" 
+			id="password"
+			name="password"
+			required
+		>
+
+		<p>{{user.email}}</p>
+		
+		<button type="submit" class="btn btn-success">Submit</button>
+
+	</div>
+	
+</div>
