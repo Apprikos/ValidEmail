@@ -32,8 +32,10 @@
 			Email cannot be more than 254 characters long.
 		</div>
 		<div *ngIf="typo == true" 
-			class="alert alert-danger">
-			Did you mean {{suggestion}}?
+			class="alert alert-danger"
+			(click)="acceptChange()"
+			>
+			Did you mean {{suggestion}}? Tap to change.
 		</div>
 		
 		</span>

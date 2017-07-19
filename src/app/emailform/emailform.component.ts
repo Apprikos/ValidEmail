@@ -69,9 +69,16 @@ export class EmailformComponent {
 		this.submitted = true;
 	}
 	
+	acceptChange(){
+		console.log("clicked");
+		this.user.email = this.suggestion;
+		this.typo = false;
+	}
+	
 	validate(){
 		console.log("validate");
 		this.message = true;
+		this.typo = false;
 		this.suggestion = '';
 		
 		var at = this.user.email.indexOf("@");
@@ -81,10 +88,25 @@ export class EmailformComponent {
 			console.log(after);
 			var match = stringSimilarity.findBestMatch(after, this.domains);
 			console.log(match.bestMatch.target);
+			console.log(match);
+			var bestMatch = match.bestMatch;
 			
-			if(match.bestMatch.rating > 0.6 && match.bestMatch.rating < 1){
+			for(var i=0;i<match.ratings.length;i++){
+			
+				if(match.ratings[i].target[0] == after[0]){
+					console.log("same first letter");
+					if(match.ratings[i].rating+ 0.051 > bestMatch.rating){
+						console.log("now better match");
+						console.log(bestMatch);
+						bestMatch = match.ratings[i];
+						console.log(bestMatch);
+					}
+				}
+			}
+			
+			if(bestMatch.rating > 0.6 && bestMatch.rating < 1){
 				this.typo = true;
-				this.suggestion = this.user.email.substring(0, at+1)+match.bestMatch.target;
+				this.suggestion = this.user.email.substring(0, at+1)+bestMatch.target;
 			}
 		}
 		else if(at == -1 && this.user.email.length > 13){
