@@ -12,11 +12,10 @@ Must have Node.js and NPM available on machine.
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
 
 First: Install angular Cli (https://cli.angular.io/)
 
-run npm install -g @angular/cli
+> run npm install -g @angular/cli
 
 Second: clone project into your directory
 
