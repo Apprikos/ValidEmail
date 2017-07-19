@@ -73,6 +73,7 @@ export class EmailformComponent {
 		console.log("clicked");
 		this.user.email = this.suggestion;
 		this.typo = false;
+		this.isEmail = true;
 	}
 	
 	validate(){
@@ -126,7 +127,7 @@ export class EmailformComponent {
  
 	valuechange(newValue) {
 		this.message = false;
-		this.isEmail = true;
+		this.isEmail = false;
 		this.user.email = newValue;
 		console.log(newValue);
 		

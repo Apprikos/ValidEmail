@@ -69,6 +69,23 @@ input:invalid {
 	padding-left:1.5em;
 	padding-right:1.5em;
 	height:3em;
+	
+	background-color: #FF0000; /* red */
+    color: white;
 }
 
 
+.btn:focus, .btn:focus{
+    outline: none;
+}
+
+.okay{background-color: white;
+	background-color: #41AD49;
+    color: white;
+}
+
+
+.okay:active{
+	color: black;
+    border: 2px solid #41AD49;
+} 
