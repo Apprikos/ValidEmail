@@ -1,6 +1,7 @@
 <div class="container">
-	<h1>Login</h1>
+	<h2>Login</h2>
 	<div>
+		
 		<input [ngModel]="user.email" 
 			(ngModelChange)="valuechange($event)"
 			placeholder="email"
@@ -13,7 +14,9 @@
 			required
 			email
 			(blur)="validate()"
+			
 		>
+		
 		<span *ngIf="message == true">
 		<div [hidden]="email.valid || email.pristine || email.errors.minlength "
 			class="alert alert-danger">
@@ -40,7 +43,7 @@
 		
 		</span>
 		<input [(ngModel)]="user.password" 
-			placeholder="Password"
+			placeholder="password"
 			type="password"
 			class="form-control" 
 			id="password"
@@ -49,7 +52,7 @@
 			
 		>
 
-		<p>{{user.email}}</p>
+<!--		<p>{{user.email}}</p> -->
 		
 		<button type="submit" class="btn btn-success">Submit</button>
 
