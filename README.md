@@ -19,7 +19,7 @@ First: Install angular Cli (https://cli.angular.io/)
 
 Second: clone project into your directory
 
-Third: cd project/folder
+Third: cd where you have cloned the project
 
 Forth: run ng serve
 
