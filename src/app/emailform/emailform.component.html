@@ -31,6 +31,11 @@
 			class="alert alert-danger">
 			Email cannot be more than 254 characters long.
 		</div>
+		<div *ngIf="typo == true" 
+			class="alert alert-danger">
+			Did you mean {{suggestion}}?
+		</div>
+		
 		</span>
 		<input [(ngModel)]="user.password" 
 			placeholder="Password"

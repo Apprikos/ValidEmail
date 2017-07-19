@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import * as stringSimilarity from "string-similarity";
 
 @Component({
   selector: 'app-emailform',
@@ -7,12 +7,59 @@ import { Component } from '@angular/core';
   styleUrls: ['./emailform.component.scss']
 })
 export class EmailformComponent {
+	
+	domains = [
+  
+  "aol.com", "att.net", "comcast.net", "facebook.com", "gmail.com", "gmx.com", "googlemail.com",
+  "google.com", "hotmail.com", "hotmail.co.uk", "mac.com", "me.com", "mail.com", "msn.com",
+  "live.com", "sbcglobal.net", "verizon.net", "yahoo.com", "yahoo.co.uk",
 
+  /* Other global domains */
+  "email.com", "games.com" /* AOL */, "gmx.net", "hush.com", "hushmail.com", "icloud.com", "inbox.com",
+  "lavabit.com", "love.com" /* AOL */, "outlook.com", "pobox.com", "rocketmail.com" /* Yahoo */,
+  "safe-mail.net", "wow.com" /* AOL */, "ygm.com" /* AOL */, "ymail.com" /* Yahoo */, "zoho.com", "fastmail.fm",
+  "yandex.com","iname.com",
+
+  /* United States ISP domains */
+  "bellsouth.net", "charter.net", "cox.net", "earthlink.net", "juno.com",
+
+  /* British ISP domains */
+  "btinternet.com", "virginmedia.com", "blueyonder.co.uk", "freeserve.co.uk", "live.co.uk",
+  "ntlworld.com", "o2.co.uk", "orange.net", "sky.com", "talktalk.co.uk", "tiscali.co.uk",
+  "virgin.net", "wanadoo.co.uk", "bt.com",
+
+  /* Domains used in Asia */
+  "sina.com", "qq.com", "naver.com", "hanmail.net", "daum.net", "nate.com", "yahoo.co.jp", "yahoo.co.kr", "yahoo.co.id", "yahoo.co.in", "yahoo.com.sg", "yahoo.com.ph",
+
+  /* French ISP domains */
+  "hotmail.fr", "live.fr", "laposte.net", "yahoo.fr", "wanadoo.fr", "orange.fr", "gmx.fr", "sfr.fr", "neuf.fr", "free.fr",
+
+  /* German ISP domains */
+  "gmx.de", "hotmail.de", "live.de", "online.de", "t-online.de" /* T-Mobile */, "web.de", "yahoo.de",
+
+  /* Russian ISP domains */
+  "mail.ru", "rambler.ru", "yandex.ru", "ya.ru", "list.ru",
+
+  /* Belgian ISP domains */
+  "hotmail.be", "live.be", "skynet.be", "voo.be", "tvcablenet.be", "telenet.be",
+
+  /* Argentinian ISP domains */
+  "hotmail.com.ar", "live.com.ar", "yahoo.com.ar", "fibertel.com.ar", "speedy.com.ar", "arnet.com.ar",
+
+  /* Domains used in Mexico */
+  "yahoo.com.mx", "live.com.mx", "hotmail.es", "hotmail.com.mx", "prodigy.net.mx",
+
+  /* Domains used in Brazil */
+  "yahoo.com.br", "hotmail.com.br", "outlook.com.br", "uol.com.br", "bol.com.br", "terra.com.br", "ig.com.br", "itelefonica.com.br", "r7.com", "zipmail.com.br", "globo.com", "globomail.com", "oi.com.br"
+];
+	
 	user = {email:'',
 	password:''} ;
 	
 	submitted = false;
 	typo = false;
+	suggestion = '';
+	close = false;
 	isEmail = false;
 	time = null;
 	wait = false;
@@ -25,6 +72,33 @@ export class EmailformComponent {
 	validate(){
 		console.log("validate");
 		this.message = true;
+		this.suggestion = '';
+		
+		var at = this.user.email.indexOf("@");
+		// if there is an @
+		if(at > -1 && at != this.user.email.length-1){
+			var after = this.user.email.substring(at+1, this.user.email.length);
+			console.log(after);
+			var match = stringSimilarity.findBestMatch(after, this.domains);
+			console.log(match.bestMatch.target);
+			
+			if(match.bestMatch.rating > 0.6 && match.bestMatch.rating < 1){
+				this.typo = true;
+				this.suggestion = this.user.email.substring(0, at+1)+match.bestMatch.target;
+			}
+		}
+		else if(at == -1 && this.user.email.length > 13){
+			var after = this.user.email.substring(this.user.email.length-12, this.user.email.length);
+			console.log(after);
+			var match = stringSimilarity.findBestMatch(after, this.domains);
+			console.log(match.bestMatch);
+			if(match.bestMatch.rating > 0.6){
+				this.typo = true;
+				match.bestMatch.target
+				var before = this.user.email.substring(0, this.user.email.length-match.bestMatch.target.length);
+				this.suggestion = before+"@"+match.bestMatch.target;
+			}
+		}
 	}
 	
  
