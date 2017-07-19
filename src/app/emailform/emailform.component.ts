@@ -65,8 +65,9 @@ export class EmailformComponent {
 	wait = false;
 	message = false;
 	
-	onSubmit() {
+	submit() {
 		this.submitted = true;
+		console.log("submitted");
 	}
 	
 	acceptChange(){

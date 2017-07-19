@@ -60,6 +60,8 @@
 		<button type="submit" 
 				class="btn btn-success"
 				[ngClass]="{'okay': password.valid && email.valid}"
+				(click)='password.valid && email.valid && submit()'
+				
 				>Submit</button>
 
 	</div>
