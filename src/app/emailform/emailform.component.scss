@@ -44,6 +44,7 @@ textarea:focus, input:focus{
     outline: none;
 }
 
+
 .form-control{
 	max-width: 80%;
 	min-width: 80%;
@@ -55,9 +56,13 @@ textarea:focus, input:focus{
 	height:3em;
 }
 
+input:invalid {
+    box-shadow: none;
+}
+
 .btn{
-	max-width: 80%;
-	min-width: 80%;
+	max-width: 82.5%;
+	min-width: 82.5%;
 	padding: 0.5em;
 	margin:1em;
 	border-radius: 25px;
